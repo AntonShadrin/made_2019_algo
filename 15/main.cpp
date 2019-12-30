@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "full_graph.h"
 #include <random>
 #include <cmath>
@@ -10,13 +11,14 @@ int main()
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<> dis(-1.0, 0);
-	int maxN = 9;
+	int maxN = 10;
 	const double pi = std::acos(-1);
 	int sample_size = 10;
-	std::cout << "sample size = " << sample_size << std::endl << std::endl;
-	for (int n = 2; n < maxN; ++n)
+	std::ofstream fout("result.txt");
+	fout << "sample size = " << sample_size << std::endl << std::endl;
+	for (int n = 3; n <= maxN; ++n)
 	{
-		std::cout << "n = " << n << std::endl;
+		fout << "n = " << n << std::endl;
 		double mean = 0.0;
 		double mean_sqr = 0.0;
 		for (int j = 0; j < sample_size; j++)
@@ -41,8 +43,8 @@ int main()
 		mean_sqr /= double(sample_size);
 		if(mean_sqr!=0)
 			mean_sqr = pow(mean_sqr, 0.5);
-		std::cout << "mean = " << mean << std::endl;
-		std::cout << "mean_sqr = " << mean_sqr << std::endl << std::endl;
+		fout << "mean = " << mean << std::endl;
+		fout << "mean_sqr = " << mean_sqr << std::endl << std::endl;
 	}
 
 	return 0;
