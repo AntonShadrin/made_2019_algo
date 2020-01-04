@@ -21,6 +21,8 @@ int main()
 		fout << "n = " << n << std::endl;
 		double mean = 0.0;
 		double mean_sqr = 0.0;
+		double mean_aproximate = 0.0;
+		double mean_minimal = 0.0;
 		for (int j = 0; j < sample_size; j++)
 		{
 			std::vector<point> init_vector;
@@ -37,12 +39,18 @@ int main()
 			double approximate = graph.GetApproximateWeightGraphPath();
 			double minimal = graph.GetMinimalWeightGraphPath();
 			mean += approximate - minimal;
+			mean_aproximate += approximate;
+			mean_minimal += minimal;
 			mean_sqr += pow(approximate - minimal,2);
 		}
+		mean_aproximate /= double(sample_size);
+		mean_minimal /= double(sample_size);
 		mean /= double(sample_size);
 		mean_sqr /= double(sample_size);
 		if(mean_sqr!=0)
 			mean_sqr = pow(mean_sqr, 0.5);
+		fout << "mean_aproximate = " << mean_aproximate << std::endl;
+		fout << "mean_minimal = " << mean_minimal << std::endl;
 		fout << "mean = " << mean << std::endl;
 		fout << "mean_sqr = " << mean_sqr << std::endl << std::endl;
 	}
